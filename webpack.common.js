@@ -32,10 +32,7 @@ module.exports = {
             {
                 test: /\.html$/i,
                 loader: 'html-loader',
-                exclude: /static/,
-                // options: {
-                //     name: '[path][name].[ext]',
-                // },
+                exclude: /static/
             },
         ],
     },
