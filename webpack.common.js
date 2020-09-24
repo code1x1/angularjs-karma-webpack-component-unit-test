@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const webpack = require("webpack");
 const staticPath = path.resolve(__dirname, 'static');
 const distPath = path.resolve(__dirname, 'dist');
 const srcPath = path.resolve(__dirname, 'src');
@@ -13,9 +13,10 @@ module.exports = {
     },
     output: {
         path: distPath,
-        filename: '[name].bundle.js'
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].chunk.js',
     },
-    devtool: 'inline-source-map',
+    devtool: 'eval-source-map',
     devServer: {
         contentBase: distPath,
         historyApiFallback: true,
@@ -38,18 +39,23 @@ module.exports = {
     },
     optimization: {
         splitChunks: {
+            chunks: 'async',
+            minSize: 20000,
+            maxSize: 0,
+            minChunks: 1,
+            maxAsyncRequests: 30,
+            maxInitialRequests: 30,
+            automaticNameDelimiter: '~',
+            enforceSizeThreshold: 50000,
             cacheGroups: {
-                commons: {
+                vendors: {
                     test: /[\\/]node_modules[\\/]/,
-                    // cacheGroupKey here is `commons` as the key of the cacheGroup
-                    name(module, chunks, cacheGroupKey) {
-                        const moduleFileName = module.identifier().split('/').reduceRight(item => item);
-                        const allChunksNames = chunks.map((item) => item.name).join('~');
-                        return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
-                    },
+                    // cacheGroupKey here is `vendors` as the key of the cacheGroup
+                    name: 'vendor',
                     chunks: 'all'
-                }
-            }
+                },
+                chunks: 'all'
+            },
         }
     },
     resolve: {

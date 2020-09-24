@@ -1,6 +1,6 @@
 import ng from 'angular';
 
-describe("Atom Text", () => {
+describe("Molecule Label", () => {
   beforeEach(ng.mock.module("app"));
 
   let element;
@@ -10,7 +10,7 @@ describe("Atom Text", () => {
     ng.mock.inject(
       ($rootScope: ng.IRootScopeService, $compile: ng.ICompileService, $httpBackend: ng.IHttpBackendService) => {
         scope = $rootScope.$new(true);
-        element = ng.element('<atom-text model="model"></atom-text>');
+        element = ng.element('<molecule-label model="model"></molecule-label>');
         element = $compile(element)(scope);
         scope.model = model;
         scope.$apply();
@@ -20,7 +20,7 @@ describe("Atom Text", () => {
 
   it("should render the text", function () {
     expect(element).toBeDefined();
-    var div = element.find("div");
+    var div = element.find("atom-text");
     expect(div.text()).toContain(model);
   });
 });

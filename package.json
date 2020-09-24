@@ -5,23 +5,25 @@
   "main": "dist/app.bundle.js",
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "start": "webpack-dev-server --watch --config webpack.common.js",
-    "build": "webpack --config webpack.common.js"
+    "start": "webpack-dev-server --open --watch --config webpack.common.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.8.0"
+    "@uirouter/angularjs": "^1.0.28",
+    "angular": "^1.8.0",
+    "oclazyload": "^1.1.0"
   },
   "devDependencies": {
-    "@types/angular-mocks": "^1.7.0",
     "@types/angular": "^1.7.3",
+    "@types/angular-mocks": "^1.7.0",
+    "@types/angular-ui-router": "^1.1.40",
     "@types/jasmine": "^3.5.14",
     "@types/mocha": "^8.0.3",
     "@types/node": "^14.11.1",
     "@types/webpack-env": "^1.15.3",
-    "@uirouter/angularjs": "^1.0.28",
     "angular-mocks": "^1.8.0",
     "clean-webpack-plugin": "^3.0.0",
     "file-loader": "^6.1.0",
@@ -40,6 +42,7 @@
     "typescript": "^4.0.3",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.1.4"
   }
 }
